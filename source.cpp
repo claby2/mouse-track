@@ -12,7 +12,6 @@
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 POINT screen;
-int horizontal, vertical;
 
 void init() {
     SDL_Init(SDL_INIT_VIDEO);
@@ -30,12 +29,12 @@ void close() {
     SDL_Quit();
 }
 
-void GetDesktopResolution(int& horizontal, int& vertical) {
+void GetDesktopResolution(int& SCREEN_WIDTH, int& SCREEN_HEIGHT) {
     RECT desktop;
     const HWND hDesktop = GetDesktopWindow();
     GetWindowRect(hDesktop, &desktop);
-    horizontal = desktop.right;
-    vertical = desktop.bottom;
+    SCREEN_WIDTH = desktop.right;
+    SCREEN_HEIGHT = desktop.bottom;
 }
 
 int main(int argc, char* args[]) {
@@ -48,10 +47,10 @@ int main(int argc, char* args[]) {
     bool quit = false;
     SDL_Event event;
 
-    GetDesktopResolution(horizontal, vertical); // Assigns screen width and height
+    GetDesktopResolution(SCREEN_WIDTH, SCREEN_HEIGHT); // Assigns screen width and height
 
-    SCALE_FACTOR_WIDTH = horizontal / WINDOW_WIDTH;
-    SCALE_FACTOR_HEIGHT = vertical / WINDOW_HEIGHT;
+    SCALE_FACTOR_WIDTH = SCREEN_WIDTH / WINDOW_WIDTH;
+    SCALE_FACTOR_HEIGHT = SCREEN_HEIGHT / WINDOW_HEIGHT;
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     long long elapsedTime;
@@ -71,9 +70,9 @@ int main(int argc, char* args[]) {
         SDL_RenderClear(gRenderer);
 
         if(GetCursorPos(&screen)) {
-            screen.x = std::min((int)screen.x, horizontal - 1); // Set maximum x bounds
+            screen.x = std::min((int)screen.x, SCREEN_WIDTH - 1); // Set maximum x bounds
             screen.x = std::max((int)screen.x, 0);              // Set minimum x bounds
-            screen.y = std::min((int)screen.y, vertical - 1);   // Set maximum y bounds
+            screen.y = std::min((int)screen.y, SCREEN_HEIGHT - 1);   // Set maximum y bounds
             screen.y = std::max((int)screen.y, 0);              // Set minimum y bounds
             SDL_Rect cursor = {
                 (screen.x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2), // Format x screen position relative to window size
@@ -87,7 +86,7 @@ int main(int argc, char* args[]) {
             SDL_RenderDrawRect(gRenderer, &cursor);
             if(!(elapsedTime % POLLING_RATE) && elapsedTime != previousTime) {
                 previousTime = elapsedTime;
-                file << screen.x << ',' << vertical - screen.y << "\n"; // Write x position and y position into csv
+                file << screen.x << ',' << SCREEN_HEIGHT - screen.y << "\n"; // Write x position and y position into csv
             }
         }
 
