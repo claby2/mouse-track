@@ -6,10 +6,13 @@
 
 const int HEATMAP_WIDTH = 50;
 const int HEATMAP_HEIGHT = 50;
-long long heatmap[HEATMAP_HEIGHT][HEATMAP_WIDTH];
+long long heatmap[HEATMAP_HEIGHT][HEATMAP_WIDTH]; // Stores frequency coordinate appears when normalized
 long long heatmapMinimum = LONG_MAX;
 long long heatmapMaximum = 0;
 
+/* 
+Increment frequency in heatmap
+*/
 void InputToHeatmap(double screenX, double screenY) {
     heatmap[(int)screenY / (SCREEN_HEIGHT / HEATMAP_HEIGHT)][(int)screenX / (SCREEN_WIDTH / HEATMAP_WIDTH)]++;
 }
