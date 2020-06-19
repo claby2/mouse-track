@@ -10,6 +10,6 @@ y = [i[1] for i in data]
 del x[0]
 del y[0]
 
-plt.scatter(x, y)
+plt.plot(x, y)
 plt.axis('off')
 plt.show()
