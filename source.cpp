@@ -18,6 +18,7 @@ int SCREEN_WIDTH;
 int SCREEN_HEIGHT;
 float SCALE_FACTOR_WIDTH;    // Equal to screen width divided by window width
 float SCALE_FACTOR_HEIGHT;   // Equal to screen height divided by window height
+bool save = true;            // Flag to decide whether to save to data.csv or not
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -48,11 +49,22 @@ void GetDesktopResolution(int& SCREEN_WIDTH, int& SCREEN_HEIGHT) {
 }
 
 int main(int argc, char* args[]) {
+    if(argc > 1) {
+        std::string arg = args[1];
+        if(arg == "--save") {
+            save = true;
+        } else if(arg == "--nosave") {
+            save = false;
+        }
+    }
     init();
 
-    std::ofstream file("data.csv");
-    file << "x position, y position\n";
-
+    std::ofstream file;
+    if(save) {
+        file.open("data.csv");
+        file << "x position, y position\n";
+    }
+    
     bool quit = false;
     SDL_Event event;
 
@@ -93,7 +105,7 @@ int main(int argc, char* args[]) {
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderFillRect(gRenderer, &cursor);
             SDL_RenderDrawRect(gRenderer, &cursor);
-            if(!(elapsedTime % POLLING_RATE) && elapsedTime != previousTime) {
+            if(!(elapsedTime % POLLING_RATE) && elapsedTime != previousTime && save) {
                 previousTime = elapsedTime;
                 file << screen.x << ',' << SCREEN_HEIGHT - screen.y << "\n"; // Write x position and y position into csv
             }
