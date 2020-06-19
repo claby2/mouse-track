@@ -1,7 +1,7 @@
 # Mouse Track
 Track, display, and graph the position of a mouse cursor.
 
-The application produces a heatmap and plots the mouse positions .
+The application produces a heatmap and plots the mouse positions. Mouse Track is only available for Windows OS as it requires functions from the Windows API.
 
 ## Getting Started
 
