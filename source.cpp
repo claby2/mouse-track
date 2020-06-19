@@ -4,12 +4,14 @@
 #include <iostream>
 #include <algorithm>
 #include <fstream>
+#include <chrono>
 #include <Windows.h>
 #include "wtypes.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
 const int CURSOR_SIZE = 10;
+const int POLLING_RATE = 10; // Time between mouse position captures in milliseconds
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -52,7 +54,14 @@ int main(int argc, char* args[]) {
 
     GetDesktopResolution(horizontal, vertical); // Assigns screen width and height
 
+    std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
+    long long elapsedTime;
+    long long previousTime = -1;
+
     while(!quit) {
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+
         while(SDL_PollEvent(&event) != 0) {
             if(event.type == SDL_QUIT) {
                 quit = true;
@@ -77,7 +86,10 @@ int main(int argc, char* args[]) {
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderFillRect(gRenderer, &cursor);
             SDL_RenderDrawRect(gRenderer, &cursor);
-            file << screen.x << ',' << screen.y << "\n"; // Write x position and y position into csv
+            if(!(elapsedTime % POLLING_RATE) && elapsedTime != previousTime) {
+                previousTime = elapsedTime;
+                file << horizontal - screen.x << ',' << vertical - screen.y << "\n"; // Write x position and y position into csv
+            }
         }
 
         SDL_RenderPresent(gRenderer);
