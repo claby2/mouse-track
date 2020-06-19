@@ -87,7 +87,7 @@ int main(int argc, char* args[]) {
             SDL_RenderDrawRect(gRenderer, &cursor);
             if(!(elapsedTime % POLLING_RATE) && elapsedTime != previousTime) {
                 previousTime = elapsedTime;
-                file << horizontal - screen.x << ',' << vertical - screen.y << "\n"; // Write x position and y position into csv
+                file << screen.x << ',' << vertical - screen.y << "\n"; // Write x position and y position into csv
             }
         }
 
