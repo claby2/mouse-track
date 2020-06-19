@@ -58,17 +58,19 @@ int main(int argc, char* args[]) {
         }
     }
     init();
-
-    std::ofstream file;
-    if(save) {
-        file.open("../data.csv");
-        file << "x position, y position\n";
-    }
     
     bool quit = false;
     SDL_Event event;
 
     GetDesktopResolution(SCREEN_WIDTH, SCREEN_HEIGHT); // Assigns screen width and height
+
+    std::ofstream file;
+    if(save) {
+        file.open("../data.csv");
+        file << "#w," << SCREEN_WIDTH << "\n";
+        file << "#h," << SCREEN_HEIGHT << "\n";
+        file << "x position, y position\n";
+    }
 
     SCALE_FACTOR_WIDTH = SCREEN_WIDTH / WINDOW_WIDTH;
     SCALE_FACTOR_HEIGHT = SCREEN_HEIGHT / WINDOW_HEIGHT;
