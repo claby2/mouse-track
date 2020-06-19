@@ -12,7 +12,7 @@ const int CURSOR_SIZE = 10;
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
-POINT screen, window;
+POINT screen;
 int horizontal, vertical;
 
 void init() {
