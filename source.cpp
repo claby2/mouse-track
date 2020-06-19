@@ -64,7 +64,7 @@ int main(int argc, char* args[]) {
             screen.y = std::max((int)screen.y, 0);              // Set minimum y bounds
             SDL_Rect cursor = {
                 (screen.x / (horizontal / WINDOW_WIDTH)) - (CURSOR_SIZE / 2), // Format x screen position relative to window size
-                (screen.y / (vertical / WINDOW_HEIGHT)) - (CURSOR_SIZE / 2),  // Format x screen position relative to window size
+                (screen.y / (vertical / WINDOW_HEIGHT)) - (CURSOR_SIZE / 2),  // Format y screen position relative to window size
                 CURSOR_SIZE,
                 CURSOR_SIZE
             };
