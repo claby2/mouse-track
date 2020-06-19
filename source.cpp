@@ -80,12 +80,12 @@ int main(int argc, char* args[]) {
         SDL_RenderClear(gRenderer);
 
         if(GetCursorPos(&screen)) {
-            screen.x = std::min((int)screen.x, SCREEN_WIDTH - 1); // Set maximum x bounds
-            screen.x = std::max((int)screen.x, 0);              // Set minimum x bounds
-            screen.y = std::min((int)screen.y, SCREEN_HEIGHT - 1);   // Set maximum y bounds
-            screen.y = std::max((int)screen.y, 0);              // Set minimum y bounds
+            screen.x = std::min((int)screen.x, SCREEN_WIDTH - 1);  // Set maximum x bounds
+            screen.x = std::max((int)screen.x, 0);                 // Set minimum x bounds
+            screen.y = std::min((int)screen.y, SCREEN_HEIGHT - 1); // Set maximum y bounds
+            screen.y = std::max((int)screen.y, 0);                 // Set minimum y bounds
             SDL_Rect cursor = {
-                (screen.x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2), // Format x screen position relative to window size
+                (screen.x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2),   // Format x screen position relative to window size
                 (screen.y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2),  // Format y screen position relative to window size
                 CURSOR_SIZE,
                 CURSOR_SIZE
