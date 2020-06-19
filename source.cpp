@@ -50,8 +50,7 @@ void GetDesktopResolution(int& SCREEN_WIDTH, int& SCREEN_HEIGHT) {
 int main(int argc, char* args[]) {
     init();
 
-    std::ofstream file;
-    file.open("data.csv");
+    std::ofstream file("data.csv");
     file << "x position, y position\n";
 
     bool quit = false;
@@ -104,6 +103,7 @@ int main(int argc, char* args[]) {
         SDL_RenderPresent(gRenderer);
     }
 
+    DrawHeatmap();
     close();
     return 0;
 }
