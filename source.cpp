@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 #include <Windows.h>
 #include "wtypes.h"
 
@@ -42,6 +43,10 @@ void GetDesktopResolution(int& horizontal, int& vertical) {
 int main(int argc, char* args[]) {
     init();
 
+    std::ofstream file;
+    file.open("data.csv");
+    file << "x position, y position\n";
+
     bool quit = false;
     SDL_Event event;
 
@@ -72,6 +77,7 @@ int main(int argc, char* args[]) {
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderFillRect(gRenderer, &cursor);
             SDL_RenderDrawRect(gRenderer, &cursor);
+            file << screen.x << ',' << screen.y << "\n"; // Write x position and y position into csv
         }
 
         SDL_RenderPresent(gRenderer);
