@@ -12,6 +12,8 @@ const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
 const int CURSOR_SIZE = 10;
 const int POLLING_RATE = 10; // Time between mouse position captures in milliseconds
+float SCALE_FACTOR_WIDTH;    // Equal to screen width divided by window width
+float SCALE_FACTOR_HEIGHT;   // Equal to screen height divided by window height
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -54,6 +56,9 @@ int main(int argc, char* args[]) {
 
     GetDesktopResolution(horizontal, vertical); // Assigns screen width and height
 
+    SCALE_FACTOR_WIDTH = horizontal / WINDOW_WIDTH;
+    SCALE_FACTOR_HEIGHT = vertical / WINDOW_HEIGHT;
+
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     long long elapsedTime;
     long long previousTime = -1;
@@ -77,8 +82,8 @@ int main(int argc, char* args[]) {
             screen.y = std::min((int)screen.y, vertical - 1);   // Set maximum y bounds
             screen.y = std::max((int)screen.y, 0);              // Set minimum y bounds
             SDL_Rect cursor = {
-                (screen.x / (horizontal / WINDOW_WIDTH)) - (CURSOR_SIZE / 2), // Format x screen position relative to window size
-                (screen.y / (vertical / WINDOW_HEIGHT)) - (CURSOR_SIZE / 2),  // Format y screen position relative to window size
+                (screen.x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2), // Format x screen position relative to window size
+                (screen.y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2),  // Format y screen position relative to window size
                 CURSOR_SIZE,
                 CURSOR_SIZE
             };
