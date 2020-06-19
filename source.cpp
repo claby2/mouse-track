@@ -10,6 +10,9 @@
 #include "./constants.cpp"
 #include "./heatmap.cpp"
 
+float SCALE_FACTOR_WIDTH;    // Equal to screen width divided by window width
+float SCALE_FACTOR_HEIGHT;   // Equal to screen height divided by window height
+
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 POINT screen;
