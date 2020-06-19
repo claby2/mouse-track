@@ -7,7 +7,7 @@
 #include <chrono>
 #include <Windows.h>
 #include "wtypes.h"
-#include "./constants.cpp"
+#include "./common.h"
 #include "./heatmap.cpp"
 
 float SCALE_FACTOR_WIDTH;    // Equal to screen width divided by window width

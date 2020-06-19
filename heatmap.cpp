@@ -1,6 +1,6 @@
 #ifndef HEATMAP_CPP
 #define HEATMAP_CPP
-#include "./constants.cpp"
+#include "./common.h"
 
 const int HEATMAP_WIDTH = 100;
 const int HEATMAP_HEIGHT = 100;
