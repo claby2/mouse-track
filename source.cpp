@@ -1,5 +1,7 @@
 #define SDL_MAIN_HANDLED
 
+#include "./common.h"
+#include "./heatmap.cpp"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <algorithm>
@@ -7,8 +9,6 @@
 #include <chrono>
 #include <Windows.h>
 #include "wtypes.h"
-#include "./common.h"
-#include "./heatmap.cpp"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
