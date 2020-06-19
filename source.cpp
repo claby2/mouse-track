@@ -8,6 +8,7 @@
 #include <Windows.h>
 #include "wtypes.h"
 #include "./constants.cpp"
+#include "./heatmap.cpp"
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -88,6 +89,7 @@ int main(int argc, char* args[]) {
                 previousTime = elapsedTime;
                 file << screen.x << ',' << SCREEN_HEIGHT - screen.y << "\n"; // Write x position and y position into csv
             }
+            InputToHeatmap(screen.x, screen.y);
         }
 
         SDL_RenderPresent(gRenderer);
