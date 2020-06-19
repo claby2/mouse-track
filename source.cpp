@@ -7,13 +7,7 @@
 #include <chrono>
 #include <Windows.h>
 #include "wtypes.h"
-
-const int WINDOW_WIDTH = 640;
-const int WINDOW_HEIGHT = 480;
-const int CURSOR_SIZE = 10;
-const int POLLING_RATE = 10; // Time between mouse position captures in milliseconds
-float SCALE_FACTOR_WIDTH;    // Equal to screen width divided by window width
-float SCALE_FACTOR_HEIGHT;   // Equal to screen height divided by window height
+#include "./constants.cpp"
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
