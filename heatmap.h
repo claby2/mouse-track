@@ -1,6 +1,6 @@
 #ifndef HEATMAP_CPP
 #define HEATMAP_CPP
-#include "./common.h"
+#include "common.h"
 #include <SDL2/SDL.h>
 #include <limits.h>
 

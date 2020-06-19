@@ -1,7 +1,7 @@
 #define SDL_MAIN_HANDLED
 
-#include "./common.h"
-#include "./heatmap.h"
+#include "common.h"
+#include "heatmap.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <algorithm>
