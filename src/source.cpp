@@ -61,7 +61,7 @@ int main(int argc, char* args[]) {
 
     std::ofstream file;
     if(save) {
-        file.open("data.csv");
+        file.open("../data.csv");
         file << "x position, y position\n";
     }
     

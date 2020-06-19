@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt, numpy as np, sys
 from numpy import genfromtxt
 
-data = genfromtxt('data.csv', delimiter=',')
+data = genfromtxt('../data.csv', delimiter=',')
 
 x = [i[0] for i in data]
 y = [i[1] for i in data]
