@@ -5,7 +5,7 @@
 extern const int WINDOW_WIDTH;
 extern const int WINDOW_HEIGHT;
 extern const int CURSOR_SIZE;
-extern const int POLLING_RATE; // Time between mouse position captures in milliseconds
+extern const int POLLING_RATE;
 extern int SCREEN_WIDTH;
 extern int SCREEN_HEIGHT;
 extern SDL_Window* gWindow;
