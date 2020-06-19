@@ -45,7 +45,7 @@ int main(int argc, char* args[]) {
     bool quit = false;
     SDL_Event event;
 
-    GetDesktopResolution(horizontal, vertical);
+    GetDesktopResolution(horizontal, vertical); // Assigns screen width and height
 
     while(!quit) {
         while(SDL_PollEvent(&event) != 0) {
@@ -58,16 +58,17 @@ int main(int argc, char* args[]) {
         SDL_RenderClear(gRenderer);
 
         if(GetCursorPos(&screen)) {
-            screen.x = std::min((int)screen.x, horizontal - 1);
-            screen.x = std::max((int)screen.x, 0);
-            screen.y = std::min((int)screen.y, vertical - 1);
-            screen.y = std::max((int)screen.y, 0);
+            screen.x = std::min((int)screen.x, horizontal - 1); // Set maximum x bounds
+            screen.x = std::max((int)screen.x, 0);              // Set minimum x bounds
+            screen.y = std::min((int)screen.y, vertical - 1);   // Set maximum y bounds
+            screen.y = std::max((int)screen.y, 0);              // Set minimum y bounds
             SDL_Rect cursor = {
-                (screen.x / (horizontal / WINDOW_WIDTH)) - (CURSOR_SIZE / 2),
-                (screen.y / (vertical / WINDOW_HEIGHT)) - (CURSOR_SIZE / 2),
+                (screen.x / (horizontal / WINDOW_WIDTH)) - (CURSOR_SIZE / 2), // Format x screen position relative to window size
+                (screen.y / (vertical / WINDOW_HEIGHT)) - (CURSOR_SIZE / 2),  // Format x screen position relative to window size
                 CURSOR_SIZE,
                 CURSOR_SIZE
             };
+            // Draw and fill the cursor
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderFillRect(gRenderer, &cursor);
             SDL_RenderDrawRect(gRenderer, &cursor);
@@ -79,5 +80,3 @@ int main(int argc, char* args[]) {
     close();
     return 0;
 }
-
-//g++ -std=c+=14 source.cpp -o c && c.exe
