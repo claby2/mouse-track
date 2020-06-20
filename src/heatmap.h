@@ -26,11 +26,11 @@ void InputToHeatmap(double screenX, double screenY) {
 /* 
 Set the maximum and minimum value to the highest and lowest frequency respectively
 */
-void GetHeatmapBounds(long long& max, long long& min) {
+void GetHeatmapBounds(long long *max, long long *min) {
     for(int i = 0; i < HEATMAP_HEIGHT; i++) {
         for(int j = 0; j < HEATMAP_WIDTH; j++) {
-            if(heatmap[i][j] > max) max = heatmap[i][j];
-            if(heatmap[i][j] < min) min = heatmap[i][j];
+            if(heatmap[i][j] > *max) *max = heatmap[i][j];
+            if(heatmap[i][j] < *min) *min = heatmap[i][j];
         }
     }
 }
@@ -64,35 +64,35 @@ void SaveAsBMP() {
 /*
 Get RGB value based on normalized value in range 0 to 100 to generate colormap
 */
-void GetRGB(int normalizedValue, int &red, int &green, int &blue) {
+void GetRGB(int normalizedValue, int *red, int *green, int *blue) {
     if(normalizedValue <= NORMALIZED_MAXIMUM / COLORMAP_CATEGORIES) {
-        red = 0;
-        green = COLORMAP_GRADIENT * normalizedValue;                // Only increasing green
-        blue = 255;
+        *red = 0;
+        *green = COLORMAP_GRADIENT * normalizedValue;                // Only increasing green
+        *blue = 255;
     } else if(normalizedValue <= 2 * (NORMALIZED_MAXIMUM / COLORMAP_CATEGORIES)) {
-        red = 0;
-        green = 255;
-        blue = 255 - (COLORMAP_GRADIENT * (normalizedValue - 25));  // Only decreasing blue
+        *red = 0;
+        *green = 255;
+        *blue = 255 - (COLORMAP_GRADIENT * (normalizedValue - 25));  // Only decreasing blue
     } else if(normalizedValue <= 3 * (NORMALIZED_MAXIMUM / COLORMAP_CATEGORIES)) {
-        red = COLORMAP_GRADIENT * (normalizedValue - 50);           // Only increasing red
-        green = 255;
-        blue = 0;
+        *red = COLORMAP_GRADIENT * (normalizedValue - 50);           // Only increasing red
+        *green = 255;
+        *blue = 0;
     } else if(normalizedValue <= NORMALIZED_MAXIMUM) {
-        red = 255;
-        green = 255 - (COLORMAP_GRADIENT * (normalizedValue - 75)); // Only decreasing green
-        blue = 0;
+        *red = 255;
+        *green = 255 - (COLORMAP_GRADIENT * (normalizedValue - 75)); // Only decreasing green
+        *blue = 0;
     }
 }
 
 void DrawHeatmap() {
-    GetHeatmapBounds(heatmapMaximum, heatmapMinimum);
+    GetHeatmapBounds(&heatmapMaximum, &heatmapMinimum);
 
     SDL_SetWindowSize(gWindow, HEATMAP_WINDOW_SIZE, HEATMAP_WINDOW_SIZE);
     SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF); // Clear window
     for(int i = 0; i < HEATMAP_HEIGHT; i++) {
         for(int j = 0; j < HEATMAP_WIDTH; j++) {
             int red, green, blue;
-            GetRGB(NormalizeValue(heatmap[i][j]), red, green, blue);
+            GetRGB(NormalizeValue(heatmap[i][j]), &red, &green, &blue);
             SDL_SetRenderDrawColor(gRenderer, red, green, blue, 255);
             SDL_Rect cell = {
                 HEATMAP_CELL_SIZE * j,
