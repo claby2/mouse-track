@@ -23,7 +23,7 @@ Output to CLI while the mouse is tracking
 */
 void CLIPrintTracking(long long elapsedTime) {
     if(!(elapsedTime % TRACKING_POLLING_RATE) && elapsedTime != previousTime) {
-        previousTime = elapsedTime;
+        previousTime = elapsedTime; // To catch if the next iteration happens during the same elapsed time
         index = index < sizeof(TRACKING_ANIMATION_FRAMES)/sizeof(*TRACKING_ANIMATION_FRAMES) - 1 ? index + 1 : 0;
         std::cout << "TRACKING " << TRACKING_ANIMATION_FRAMES[index] << "\r";
         std::cout.flush();

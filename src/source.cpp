@@ -112,7 +112,7 @@ int main(int argc, char* args[]) {
             SDL_RenderFillRect(gRenderer, &cursor);
             SDL_RenderDrawRect(gRenderer, &cursor);
             if(!(elapsedTime % POLLING_RATE) && elapsedTime != previousTime && save) {
-                previousTime = elapsedTime;
+                previousTime = elapsedTime;                                  // To catch if the next iteration happens during the same elapsed time
                 file << screen.x << ',' << SCREEN_HEIGHT - screen.y << "\n"; // Write x position and y position into csv
             }
             InputToHeatmap(screen.x, screen.y);
