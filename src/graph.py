@@ -5,17 +5,17 @@ parser = optparse.OptionParser();
 parser.add_option('-s', action = "store_true", dest = "save", default = False, help = "save plot as image")
 options, args = parser.parse_args()
 
-file_path = '../data.csv'
+data_file_path = '../data.csv'
 
 # Get data from CSV
-data = genfromtxt(file_path, delimiter=',')
+data = genfromtxt(data_file_path, delimiter=',')
 
 x = [i[0] for i in data]
 y = [i[1] for i in data]
 
 # Set screen dimensions from CSV meta data
 def get_screen_dimensions():
-    with open(file_path, newline='') as f:
+    with open(data_file_path, newline='') as f:
         reader = csv.reader(f)
         return(next(reader)[1], next(reader)[1])
 
