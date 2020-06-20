@@ -1,5 +1,6 @@
 #ifndef CLI_H
 #define CLI_H
+#include "common.h"
 #include <iostream>
 
 const int TRACKING_POLLING_RATE = 100;                                  // Time between tracking animation frames (CLI output)
@@ -10,7 +11,7 @@ const std::string TRACKING_ANIMATION_FRAMES[4] = {"\\", "|", "/", "-"}; // Frame
 /*
 Signifies where data will end up
 */
-void CLIPrintStart(bool save) {
+void CLIPrintStart() {
     std::cout << "Starting Mouse Track capture.\n\n";
     if(save) {
         std::cout << "  - Data will be written to ../data.csv\n";
