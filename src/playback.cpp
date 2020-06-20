@@ -39,22 +39,6 @@ screenDimensions screen;       // Stores screen dimensions
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
-void init() {
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
-    gWindow = SDL_CreateWindow("Mouse Track Playback", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
-    gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
-    SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0x00);
-}
-
-void close() {
-    SDL_DestroyRenderer(gRenderer);
-    SDL_DestroyWindow(gWindow);
-    gWindow = NULL;
-    gRenderer = NULL;
-    SDL_Quit();
-}
-
 int main() {
     if(mapfile.is_open()) {
         while(getline(mapfile, line)) {
@@ -90,7 +74,7 @@ int main() {
         }
     }
 
-    init();
+    init("Mouse Track PLAYBACK");
 
     bool quit = false;
     SDL_Event event;
