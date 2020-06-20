@@ -35,7 +35,7 @@ void CLIPrintTracking(long long elapsedTime) {
 Signify start of playback
 */
 void CLIPrintPlaybackStart() {
-    std::cout << "Starting Mouse Track playback based on " << dataFilePath << "\n";
+    std::cout << "Starting Mouse Track playback based on " << dataFilePath << "\n\n";
 }
 
 /*
