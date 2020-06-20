@@ -4,11 +4,17 @@
 #include <SDL2/SDL.h>
 #include <limits.h>
 
-const int HEATMAP_WIDTH = 50;
-const int HEATMAP_HEIGHT = 50;
-long long heatmap[HEATMAP_HEIGHT][HEATMAP_WIDTH]; // Stores frequency coordinate appears when normalized
-long long heatmapMinimum = LONG_MAX;
-long long heatmapMaximum = 0;
+const int HEATMAP_WIDTH = 16;
+const int HEATMAP_HEIGHT = 16;
+const int HEATMAP_WINDOW_SIZE = 600;                               // Represents witdth and height
+const int HEATMAP_CELL_SIZE = HEATMAP_WINDOW_SIZE / HEATMAP_WIDTH; // Size of one grid cell on the heatmap
+long long heatmap[HEATMAP_HEIGHT][HEATMAP_WIDTH];                  // Stores frequency coordinate appears when normalized
+long long heatmapMinimum = LONG_MAX;                               // Maximum frequency value in heatmap
+long long heatmapMaximum = 0;                                      // Minimum frequency value in heatmap
+const int COLORMAP_CATEGORIES = 4;
+const int NORMALIZED_MAXIMUM = 100;
+const int COLOR_MAXIMUM = 255;
+const float COLORMAP_GRADIENT = 10.2;
 
 /* 
 Increment frequency in heatmap
@@ -30,10 +36,10 @@ void GetHeatmapBounds(long long& max, long long& min) {
 }
 
 /* 
-Normalize value into 0 to 255 range based on minimum and maximum frequency of heatmap
+Normalize value into 0 to 100 range based on minimum and maximum frequency of heatmap
 */
 int NormalizeValue(long long value) {
-    return (int)(255 * ((float)(value - heatmapMinimum) / (heatmapMaximum - heatmapMinimum)));
+    return (int)(100 * ((float)(value - heatmapMinimum) / (heatmapMaximum - heatmapMinimum)));
 }
 
 /*
@@ -42,8 +48,8 @@ Save SDL2 heatmap window as BMP image
 void SaveAsBMP() {
     SDL_Surface *surface = SDL_CreateRGBSurface(
         0, 
-        HEATMAP_WIDTH, 
-        HEATMAP_HEIGHT, 
+        HEATMAP_WINDOW_SIZE, 
+        HEATMAP_WINDOW_SIZE, 
         32, 
         0x00ff0000, 
         0x0000ff00, 
@@ -53,6 +59,29 @@ void SaveAsBMP() {
     SDL_RenderReadPixels(gRenderer, NULL, SDL_PIXELFORMAT_ARGB8888, surface->pixels, surface->pitch);
     SDL_SaveBMP(surface, heatmapFilePath);
     SDL_FreeSurface(surface);
+}
+
+/*
+Get RGB value based on normalized value in range 0 to 100 to generate colormap
+*/
+void GetRGB(int normalizedValue, int &red, int &green, int &blue) {
+    if(normalizedValue <= NORMALIZED_MAXIMUM / COLORMAP_CATEGORIES) {
+        red = 0;
+        green = COLORMAP_GRADIENT * normalizedValue;                // Only increasing green
+        blue = 255;
+    } else if(normalizedValue <= 2 * (NORMALIZED_MAXIMUM / COLORMAP_CATEGORIES)) {
+        red = 0;
+        green = 255;
+        blue = 255 - (COLORMAP_GRADIENT * (normalizedValue - 25));  // Only decreasing blue
+    } else if(normalizedValue <= 3 * (NORMALIZED_MAXIMUM / COLORMAP_CATEGORIES)) {
+        red = COLORMAP_GRADIENT * (normalizedValue - 50);           // Only increasing red
+        green = 255;
+        blue = 0;
+    } else if(normalizedValue <= NORMALIZED_MAXIMUM) {
+        red = 255;
+        green = 255 - (COLORMAP_GRADIENT * (normalizedValue - 75)); // Only decreasing green
+        blue = 0;
+    }
 }
 
 void DrawHeatmap() {
@@ -68,16 +97,24 @@ void DrawHeatmap() {
 
     GetHeatmapBounds(heatmapMaximum, heatmapMinimum);
 
+    SDL_SetWindowSize(gWindow, HEATMAP_WINDOW_SIZE, HEATMAP_WINDOW_SIZE);
+    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF); // Clear window
     for(int i = 0; i < HEATMAP_HEIGHT; i++) {
         for(int j = 0; j < HEATMAP_WIDTH; j++) {
-            pixels[i][j] = 0xffffffffu - (NormalizeValue(heatmap[i][j]) << 8) - NormalizeValue(heatmap[i][j]); // Replace G and B values with normalized values
+            int red, green, blue;
+            GetRGB(NormalizeValue(heatmap[i][j]), red, green, blue);
+            SDL_SetRenderDrawColor(gRenderer, red, green, blue, 255);
+            SDL_Rect cell {
+                HEATMAP_CELL_SIZE * j,
+                HEATMAP_CELL_SIZE * i,
+                HEATMAP_CELL_SIZE,
+                HEATMAP_CELL_SIZE
+            };
+            SDL_RenderFillRect(gRenderer, &cell);
+            SDL_RenderDrawRect(gRenderer, &cell);
+
         }
     }
-
-    SDL_SetWindowSize(gWindow, HEATMAP_WIDTH, HEATMAP_HEIGHT);
-    SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF); // Clear window
-    SDL_UpdateTexture(gTexture, NULL, &pixels[0], HEATMAP_WIDTH * sizeof(uint32_t));
-    SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
     SDL_RenderPresent(gRenderer);
 
     SaveAsBMP();
