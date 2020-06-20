@@ -57,8 +57,8 @@ int main(int argc, char* args[]) {
         file << "x_position,y_position\n";
     }
 
-    SCALE_FACTOR_WIDTH = SCREEN_WIDTH / WINDOW_WIDTH;
-    SCALE_FACTOR_HEIGHT = SCREEN_HEIGHT / WINDOW_HEIGHT;
+    SCALE_FACTOR_WIDTH = (float)SCREEN_WIDTH / (float)WINDOW_WIDTH;
+    SCALE_FACTOR_HEIGHT = (float)SCREEN_HEIGHT / (float)WINDOW_HEIGHT;
 
     std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
     long long elapsedTime;
