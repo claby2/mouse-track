@@ -3,6 +3,7 @@
 #ifndef PLAYBACK_CPP
 #define PLAYBACK_CPP
 #include "common.h"
+#include "heatmap.h"
 #include "cli.h"
 #include <fstream>
 #include <string>
@@ -17,11 +18,6 @@ struct coordinate {
     float y;
 };
 
-struct screenDimensions {
-    float width;
-    float height;
-};
-
 int linesToSkip = 3;           // Amount of lines to not read from data (meta data)
 int linesRead;
 char delimiter = ',';
@@ -34,7 +30,8 @@ const int WINDOW_HEIGHT = 480; // Height of SDL2 window
 const int POLLING_RATE = 10;   // Time between mouse position captures in milliseconds
 float SCALE_FACTOR_WIDTH;      // Equal to screen width divided by window width
 float SCALE_FACTOR_HEIGHT;     // Equal to screen height divided by window height
-screenDimensions screen;       // Stores screen dimensions
+int SCREEN_WIDTH;
+int SCREEN_HEIGHT;
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -58,6 +55,7 @@ void getData() {
                 }
                 coord.y = std::stoi(currentFieldContent);
                 coordinates.push_back(coord);
+                InputToHeatmap(coord.x, coord.y); // Input from csv into heatmap
             } else if(linesRead < linesToSkip - 1) { // Read meta data representing screen width and height
                 bool startReadingMetaData = false;
                 for(int i = 0; i < line.length(); i++) {
@@ -68,9 +66,9 @@ void getData() {
                     }
                 }
                 if(linesRead == 0) {
-                    screen.width = std::stoi(currentFieldContent);  // Set screen width
+                    SCREEN_WIDTH = std::stoi(currentFieldContent);  // Set screen width
                 } else if(linesRead == 1) {
-                    screen.height = std::stoi(currentFieldContent); // Set screen height
+                    SCREEN_HEIGHT = std::stoi(currentFieldContent); // Set screen height
                 }
             }
             linesRead++;
@@ -91,8 +89,8 @@ int main() {
 
     int currentIndex = -1; // Index of coordinate to read
 
-    SCALE_FACTOR_WIDTH = screen.width / WINDOW_WIDTH;
-    SCALE_FACTOR_HEIGHT = screen.height / WINDOW_HEIGHT;
+    SCALE_FACTOR_WIDTH = SCREEN_WIDTH / WINDOW_WIDTH;
+    SCALE_FACTOR_HEIGHT = SCREEN_HEIGHT / WINDOW_HEIGHT;
 
     long long playbackDuration = POLLING_RATE * coordinates.size();
 
@@ -133,6 +131,8 @@ int main() {
 
         SDL_RenderPresent(gRenderer);
     }
+
+    DrawHeatmap();
 
     close();
     return 0;
