@@ -14,6 +14,9 @@ extern bool save;
 char dataFilePath[] = "../data.csv";
 char heatmapFilePath[] = "../heatmap.bmp";
 
+/*
+Initialize SDL2
+*/
 void init(char windowName[]) {
     SDL_Init(SDL_INIT_VIDEO);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "1");
@@ -22,6 +25,9 @@ void init(char windowName[]) {
     SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0x00);
 }
 
+/*
+Close SDL2
+*/
 void close() {
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
