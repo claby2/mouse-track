@@ -94,7 +94,7 @@ void DrawHeatmap() {
             int red, green, blue;
             GetRGB(NormalizeValue(heatmap[i][j]), red, green, blue);
             SDL_SetRenderDrawColor(gRenderer, red, green, blue, 255);
-            SDL_Rect cell {
+            SDL_Rect cell = {
                 HEATMAP_CELL_SIZE * j,
                 HEATMAP_CELL_SIZE * i,
                 HEATMAP_CELL_SIZE,
