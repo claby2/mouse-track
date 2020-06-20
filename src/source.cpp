@@ -54,7 +54,7 @@ int main(int argc, char* args[]) {
         file.open(dataFilePath);
         file << "#w," << SCREEN_WIDTH << "\n";
         file << "#h," << SCREEN_HEIGHT << "\n";
-        file << "x position, y position\n";
+        file << "x_position,y_position\n";
     }
 
     SCALE_FACTOR_WIDTH = SCREEN_WIDTH / WINDOW_WIDTH;
