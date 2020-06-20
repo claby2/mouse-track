@@ -4,7 +4,6 @@
 #include "heatmap.h"
 #include "cli.h"
 #include <SDL2/SDL.h>
-#include <iostream>
 #include <algorithm>
 #include <fstream>
 #include <chrono>

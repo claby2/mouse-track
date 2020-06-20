@@ -11,8 +11,6 @@
 #include <chrono>
 #include <SDL2/SDL.h>
 
-#include <iostream> // Debug
-
 struct coordinate {
     float x;
     float y;
