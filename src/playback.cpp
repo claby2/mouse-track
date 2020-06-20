@@ -40,6 +40,9 @@ screenDimensions screen;       // Stores screen dimensions
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
+/*
+Read and input mouse position data from data.csv
+*/
 void getData() {
     if(mapfile.is_open()) {
         while(getline(mapfile, line)) {
