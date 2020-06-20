@@ -1,7 +1,7 @@
 #ifndef CLI_H
 #define CLI_H
 #include "common.h"
-#include <iostream>
+#include <stdio.h>
 
 const int TRACKING_POLLING_RATE = 100;                                  // Time between tracking animation frames (CLI output)
 long long previousTime = -1;
