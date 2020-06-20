@@ -3,6 +3,7 @@
 #ifndef PLAYBACK_CPP
 #define PLAYBACK_CPP
 #include "common.h"
+#include "cli.h"
 #include <fstream>
 #include <string>
 #include <vector>
@@ -88,9 +89,15 @@ int main() {
     SCALE_FACTOR_WIDTH = screen.width / WINDOW_WIDTH;
     SCALE_FACTOR_HEIGHT = screen.height / WINDOW_HEIGHT;
 
+    long long playbackDuration = POLLING_RATE * coordinates.size();
+
+    CLIPrintPlaybackStart();
+
     while(!quit) {
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+
+        CLIPrintPlaybackProgress((float)currentIndex / (float)coordinates.size());
 
         while(SDL_PollEvent(&event) != 0) {
             if(event.type == SDL_QUIT) {

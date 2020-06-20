@@ -11,7 +11,7 @@ const std::string TRACKING_ANIMATION_FRAMES[4] = {"\\", "|", "/", "-"}; // Frame
 /*
 Signifies where data will end up
 */
-void CLIPrintStart() {
+void CLIPrintStart(bool save) {
     std::cout << "Starting Mouse Track capture.\n\n";
     if(save) {
         std::cout << "  - Data will be written to " << dataFilePath << "\n";
@@ -29,6 +29,30 @@ void CLIPrintTracking(long long elapsedTime) {
         std::cout << "TRACKING " << TRACKING_ANIMATION_FRAMES[index] << "\r";
         std::cout.flush();
     }
+}
+
+/*
+Signify start of playback
+*/
+void CLIPrintPlaybackStart() {
+    std::cout << "Starting Mouse Track playback based on " << dataFilePath << "\n";
+}
+
+/*
+Output to CLI the progress of the playback
+*/
+void CLIPrintPlaybackProgress(float progress) {
+    if(progress != 1) {
+        std::cout << '<' << 
+        std::string(((int)(progress * 10)) % 10, '#') << 
+        std::string( 10 - (((int)(progress * 10)) % 10), '-') <<
+        "> " <<
+        (int)(progress * 100) << 
+        "% PLAYING" << "\r";
+    } else {
+        std::cout << "<##########> 100\% PLAYING" << "\r";
+    }
+    std::cout.flush();
 }
 
 #endif

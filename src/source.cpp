@@ -64,7 +64,7 @@ int main(int argc, char* args[]) {
     long long elapsedTime;
     long long previousTime = -1;
 
-    CLIPrintStart();
+    CLIPrintStart(save);
 
     while(!quit) {
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
