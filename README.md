@@ -46,3 +46,6 @@ $ python graph.py
 To run the application without writing into data.csv (for longer periods of tracking):
 1. In src: `make main`
 2. `source.exe --nosave`
+
+### Playback mouse movements based on data.csv
+1. In src: `make playback`
