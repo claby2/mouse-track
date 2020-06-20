@@ -49,3 +49,7 @@ To run the application without writing into data.csv (for longer periods of trac
 
 ### Playback mouse movements based on data.csv
 1. In src: `make playback`
+
+### Save graph as image
+1. In src: `python graph.py -s`
+    - Graph will be saved as `graph.png` in root folder
