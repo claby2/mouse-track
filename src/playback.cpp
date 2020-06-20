@@ -40,7 +40,7 @@ screenDimensions screen;       // Stores screen dimensions
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
-int main() {
+void getData() {
     if(mapfile.is_open()) {
         while(getline(mapfile, line)) {
             currentFieldContent = "";
@@ -56,7 +56,7 @@ int main() {
                 }
                 coord.y = std::stoi(currentFieldContent);
                 coordinates.push_back(coord);
-            } else if(linesRead < linesToSkip - 1) {
+            } else if(linesRead < linesToSkip - 1) { // Read meta data representing screen width and height
                 bool startReadingMetaData = false;
                 for(int i = 0; i < line.length(); i++) {
                     if(line[i] == delimiter) {
@@ -66,15 +66,18 @@ int main() {
                     }
                 }
                 if(linesRead == 0) {
-                    screen.width = std::stoi(currentFieldContent);
+                    screen.width = std::stoi(currentFieldContent);  // Set screen width
                 } else if(linesRead == 1) {
-                    screen.height = std::stoi(currentFieldContent);
+                    screen.height = std::stoi(currentFieldContent); // Set screen height
                 }
             }
             linesRead++;
         }
     }
+}
 
+int main() {
+    getData();
     init("Mouse Track PLAYBACK");
 
     bool quit = false;
