@@ -11,10 +11,10 @@ const int HEATMAP_CELL_SIZE = HEATMAP_WINDOW_SIZE / HEATMAP_WIDTH; // Size of on
 long long heatmap[HEATMAP_HEIGHT][HEATMAP_WIDTH];                  // Stores frequency coordinate appears when normalized
 long long heatmapMinimum = LONG_MAX;                               // Maximum frequency value in heatmap
 long long heatmapMaximum = 0;                                      // Minimum frequency value in heatmap
-const int COLORMAP_CATEGORIES = 4;
-const int NORMALIZED_MAXIMUM = 100;
-const int COLOR_MAXIMUM = 255;
-const float COLORMAP_GRADIENT = 10.2;
+const int COLORMAP_CATEGORIES = 4;                                 // The amount of color categories which belong to the colormap
+const int NORMALIZED_MAXIMUM = 100;                                // The maximum value the frequency can take when normalized
+const int COLOR_MAXIMUM = 255;                                     // Maximum value for a single color channel
+const float COLORMAP_GRADIENT = 10.2;                              // Calculated by the COLOR_MAXIMUM / (NORMALIZED_MAXIMUM / COLORMAP_CATEGORIES)
 
 /* 
 Increment frequency in heatmap
@@ -39,7 +39,7 @@ void GetHeatmapBounds(long long& max, long long& min) {
 Normalize value into 0 to 100 range based on minimum and maximum frequency of heatmap
 */
 int NormalizeValue(long long value) {
-    return (int)(100 * ((float)(value - heatmapMinimum) / (heatmapMaximum - heatmapMinimum)));
+    return (int)(NORMALIZED_MAXIMUM * ((float)(value - heatmapMinimum) / (heatmapMaximum - heatmapMinimum)));
 }
 
 /*
