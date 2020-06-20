@@ -1,5 +1,5 @@
-#ifndef HEATMAP_CPP
-#define HEATMAP_CPP
+#ifndef HEATMAP_H
+#define HEATMAP_H
 #include "common.h"
 #include <SDL2/SDL.h>
 #include <limits.h>
