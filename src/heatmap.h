@@ -36,8 +36,12 @@ int NormalizeValue(long long value) {
     return (int)(255 * ((float)(value - heatmapMinimum) / (heatmapMaximum - heatmapMinimum)));
 }
 
+/*
+Save SDL2 heatmap window as BMP image
+*/
 void SaveAsBMP() {
-    SDL_Surface *surface = SDL_CreateRGBSurface(0, 
+    SDL_Surface *surface = SDL_CreateRGBSurface(
+        0, 
         HEATMAP_WIDTH, 
         HEATMAP_HEIGHT, 
         32, 
@@ -66,7 +70,7 @@ void DrawHeatmap() {
 
     for(int i = 0; i < HEATMAP_HEIGHT; i++) {
         for(int j = 0; j < HEATMAP_WIDTH; j++) {
-            pixels[i][j] = 0xffffffffu - (NormalizeValue(heatmap[i][j]) << 8) - NormalizeValue(heatmap[i][j]);
+            pixels[i][j] = 0xffffffffu - (NormalizeValue(heatmap[i][j]) << 8) - NormalizeValue(heatmap[i][j]); // Replace G and B values with normalized values
         }
     }
 
