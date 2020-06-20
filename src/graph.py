@@ -1,4 +1,4 @@
-import matplotlib.pyplot as plt, numpy as np, csv
+import matplotlib.pyplot as plt, csv
 from numpy import genfromtxt
 
 file_path = '../data.csv'
