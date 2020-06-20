@@ -32,7 +32,6 @@ std::vector<coordinate> coordinates;
 const int WINDOW_WIDTH = 640;  // Width of SDL2 window
 const int WINDOW_HEIGHT = 480; // Height of SDL2 window
 const int POLLING_RATE = 10;   // Time between mouse position captures in milliseconds
-const int CURSOR_SIZE = 10;
 float SCALE_FACTOR_WIDTH;      // Equal to screen width divided by window width
 float SCALE_FACTOR_HEIGHT;     // Equal to screen height divided by window height
 screenDimensions screen;       // Stores screen dimensions
@@ -120,10 +119,10 @@ int main() {
                 if(currentIndex > 0) {
                     SDL_RenderDrawLine(
                         gRenderer, 
-                        (coordinates[currentIndex - 1].x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2),
-                        (coordinates[currentIndex - 1].y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2),
-                        (coordinates[currentIndex].x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2),
-                        (coordinates[currentIndex].y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2)
+                        (coordinates[currentIndex - 1].x / SCALE_FACTOR_WIDTH),
+                        (coordinates[currentIndex - 1].y / SCALE_FACTOR_HEIGHT),
+                        (coordinates[currentIndex].x / SCALE_FACTOR_WIDTH),
+                        (coordinates[currentIndex].y / SCALE_FACTOR_HEIGHT)
                     );
                 }
                 currentIndex++;
