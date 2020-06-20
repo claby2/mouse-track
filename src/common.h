@@ -11,7 +11,7 @@ extern int SCREEN_HEIGHT;
 extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;
 extern bool save;
-extern char* dataFilePath;
-extern char* heatmapFilePath;
+char dataFilePath[] = "../data.csv";
+char heatmapFilePath[] = "../heatmap.bmp";
 
 #endif
