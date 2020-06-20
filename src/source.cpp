@@ -11,15 +11,15 @@
 #include <Windows.h>
 #include "wtypes.h"
 
-const int WINDOW_WIDTH = 640;
-const int WINDOW_HEIGHT = 480;
+const int WINDOW_WIDTH = 640;  // Width of SDL2 window
+const int WINDOW_HEIGHT = 480; // Height of SDL2 window
 const int CURSOR_SIZE = 10;
-const int POLLING_RATE = 10; // Time between mouse position captures in milliseconds
+const int POLLING_RATE = 10;   // Time between mouse position captures in milliseconds
 int SCREEN_WIDTH;
 int SCREEN_HEIGHT;
-float SCALE_FACTOR_WIDTH;    // Equal to screen width divided by window width
-float SCALE_FACTOR_HEIGHT;   // Equal to screen height divided by window height
-bool save = true;            // Flag to decide whether to save to data.csv or not
+float SCALE_FACTOR_WIDTH;      // Equal to screen width divided by window width
+float SCALE_FACTOR_HEIGHT;     // Equal to screen height divided by window height
+bool save = true;              // Flag to decide whether to save to data.csv or not
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
