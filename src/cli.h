@@ -14,9 +14,9 @@ Signifies where data will end up
 void CLIPrintStart() {
     std::cout << "Starting Mouse Track capture.\n\n";
     if(save) {
-        std::cout << "  - Data will be written to ../data.csv\n";
+        std::cout << "  - Data will be written to " << dataFilePath << "\n";
     }
-    std::cout << "  - Heatmap will be written to ../heatmap.bmp\n\n";
+    std::cout << "  - Heatmap will be written to " << heatmapFilePath << "\n\n";
 }
 
 /*

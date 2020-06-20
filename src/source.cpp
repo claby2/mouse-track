@@ -20,6 +20,8 @@ int SCREEN_HEIGHT;
 float SCALE_FACTOR_WIDTH;      // Equal to screen width divided by window width
 float SCALE_FACTOR_HEIGHT;     // Equal to screen height divided by window height
 bool save = true;              // Flag to decide whether to save to data.csv or not
+char* dataFilePath = "../data.csv";
+char* heatmapFilePath = "../heatmap.bmp";
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -67,7 +69,7 @@ int main(int argc, char* args[]) {
 
     std::ofstream file;
     if(save) {
-        file.open("../data.csv");
+        file.open(dataFilePath);
         file << "#w," << SCREEN_WIDTH << "\n";
         file << "#h," << SCREEN_HEIGHT << "\n";
         file << "x position, y position\n";

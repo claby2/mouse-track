@@ -47,7 +47,7 @@ void SaveAsBMP() {
         0xff000000
     );
     SDL_RenderReadPixels(gRenderer, NULL, SDL_PIXELFORMAT_ARGB8888, surface->pixels, surface->pitch);
-    SDL_SaveBMP(surface, "../heatmap.bmp");
+    SDL_SaveBMP(surface, heatmapFilePath);
     SDL_FreeSurface(surface);
 }
 
