@@ -85,16 +85,6 @@ void GetRGB(int normalizedValue, int &red, int &green, int &blue) {
 }
 
 void DrawHeatmap() {
-    SDL_Texture* gTexture = SDL_CreateTexture(
-        gRenderer,
-        SDL_PIXELFORMAT_ARGB8888,
-        SDL_TEXTUREACCESS_STATIC,
-        HEATMAP_WIDTH,
-        HEATMAP_HEIGHT
-    );
-
-    uint32_t pixels[HEATMAP_HEIGHT][HEATMAP_WIDTH];
-
     GetHeatmapBounds(heatmapMaximum, heatmapMinimum);
 
     SDL_SetWindowSize(gWindow, HEATMAP_WINDOW_SIZE, HEATMAP_WINDOW_SIZE);
@@ -118,9 +108,6 @@ void DrawHeatmap() {
     SDL_RenderPresent(gRenderer);
 
     SaveAsBMP();
-
-    SDL_DestroyTexture(gTexture);
-    gTexture = NULL;
 }
 
 #endif
