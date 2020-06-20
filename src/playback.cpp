@@ -119,15 +119,16 @@ int main() {
         if(currentIndex + 1 <= coordinates.size()) {
             if(!(elapsedTime % POLLING_RATE) && elapsedTime != previousTime) {
                 previousTime = elapsedTime; // To catch if the next iteration happens during the same elapsed time
-                SDL_Rect cursor = {
-                    (coordinates[currentIndex].x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2),
-                    (coordinates[currentIndex].y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2),
-                    CURSOR_SIZE,
-                    CURSOR_SIZE
-                };
                 SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-                SDL_RenderFillRect(gRenderer, &cursor);
-                SDL_RenderDrawRect(gRenderer, &cursor);
+                if(currentIndex > 0) {
+                    SDL_RenderDrawLine(
+                        gRenderer, 
+                        (coordinates[currentIndex - 1].x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2),
+                        (coordinates[currentIndex - 1].y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2),
+                        (coordinates[currentIndex].x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2),
+                        (coordinates[currentIndex].y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2)
+                    );
+                }
                 currentIndex++;
             }
         } else {
