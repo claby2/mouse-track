@@ -1,5 +1,9 @@
-import matplotlib.pyplot as plt, csv
+import matplotlib.pyplot as plt, csv, optparse
 from numpy import genfromtxt
+
+parser = optparse.OptionParser();
+parser.add_option('-s', action = "store_true", dest = "save", default = False, help = "save plot as image")
+options, args = parser.parse_args()
 
 file_path = '../data.csv'
 
@@ -29,4 +33,6 @@ axes = plt.gca()
 axes.set_xlim([0, screen_width])
 axes.set_ylim([0, screen_height])
 plt.axis('off')
+if(options.save):
+    plt.savefig("../graph.png")
 plt.show()
