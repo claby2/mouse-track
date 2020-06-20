@@ -1,5 +1,6 @@
 .vscode
 source.exe
+playback.exe
 data.csv
 heatmap.bmp
 requirements.txt
