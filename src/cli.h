@@ -3,10 +3,10 @@
 #include "common.h"
 #include <stdio.h>
 
-const int TRACKING_POLLING_RATE = 100;                                  // Time between tracking animation frames (CLI output)
+const int TRACKING_POLLING_RATE = 100;                            // Time between tracking animation frames (CLI output)
 long long previousTime = -1;
-int index;                                                              // Stage of tracking animation frames (CLI output)
-const char *TRACKING_ANIMATION_FRAMES[4] = {"\\", "|", "/", "-"}; // Frames for tracking animation (CLI OUTPUT)
+int index;                                                        // Stage of tracking animation frames (CLI output)
+const char *TRACKING_ANIMATION_FRAMES[4] = {"\\", "|", "/", "-"}; // Frames for tracking animation (CLI output)
 
 /*
 Signifies where data will end up
