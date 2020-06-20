@@ -14,9 +14,9 @@ Signifies where data will end up
 void CLIPrintStart(bool save) {
     printf("Starting Mouse Track capture.\n\n");
     if(save) {
-        printf("    - Data will be written to %s\n", dataFilePath);
+        printf("\t- Data will be written to %s\n", dataFilePath);
     }
-    printf("    - Heatmap will be written to %s\n\n", heatmapFilePath);
+    printf("\t- Heatmap will be written to %s\n\n", heatmapFilePath);
 }
 
 /*
