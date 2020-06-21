@@ -1,7 +1,5 @@
 #define SDL_MAIN_HANDLED
 
-#ifndef PLAYBACK_CPP
-#define PLAYBACK_CPP
 #include "common.h"
 #include "heatmap.h"
 #include "cli.h"
@@ -135,5 +133,3 @@ int main() {
     close();
     return 0;
 }
-
-#endif
