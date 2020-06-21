@@ -5,3 +5,4 @@ data.csv
 heatmap.bmp
 requirements.txt
 graph.png
+*.o

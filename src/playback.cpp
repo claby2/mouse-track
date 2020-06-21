@@ -21,16 +21,8 @@ std::string currentFieldContent;
 std::string line;
 std::ifstream mapfile(dataFilePath);
 std::vector<coordinate> coordinates;
-const int WINDOW_WIDTH = 640;  // Width of SDL2 window
-const int WINDOW_HEIGHT = 480; // Height of SDL2 window
-const int POLLING_RATE = 10;   // Time between mouse position captures in milliseconds
 float SCALE_FACTOR_WIDTH;      // Equal to screen width divided by window width
 float SCALE_FACTOR_HEIGHT;     // Equal to screen height divided by window height
-int SCREEN_WIDTH;
-int SCREEN_HEIGHT;
-
-SDL_Window* gWindow = NULL;
-SDL_Renderer* gRenderer = NULL;
 
 /*
 Read and input mouse position data from data.csv
@@ -74,7 +66,8 @@ void getData() {
 
 int main() {
     getData();
-    init("Mouse Track PLAYBACK");
+    char windowName[] = "Mouse Track PLAYBACK";
+    init(windowName);
 
     bool quit = false;
     SDL_Event event;

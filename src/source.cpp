@@ -10,18 +10,8 @@
 #include <Windows.h>
 #include "wtypes.h"
 
-const int WINDOW_WIDTH = 640;  // Width of SDL2 window
-const int WINDOW_HEIGHT = 480; // Height of SDL2 window
-const int CURSOR_SIZE = 10;
-const int POLLING_RATE = 10;   // Time between mouse position captures in milliseconds
-int SCREEN_WIDTH;
-int SCREEN_HEIGHT;
 float SCALE_FACTOR_WIDTH;      // Equal to screen width divided by window width
 float SCALE_FACTOR_HEIGHT;     // Equal to screen height divided by window height
-bool save = true;              // Flag to decide whether to save to data.csv or not
-
-SDL_Window* gWindow = NULL;
-SDL_Renderer* gRenderer = NULL;
 POINT screen;
 
 void GetDesktopResolution(int& SCREEN_WIDTH, int& SCREEN_HEIGHT) {
@@ -41,7 +31,8 @@ int main(int argc, char* args[]) {
             save = false;
         }
     }
-    init("Mouse Track");
+    char windowName[] = "Mouse Track";
+    init(windowName);
     
     bool quit = false;
     SDL_Event event;
@@ -85,8 +76,8 @@ int main(int argc, char* args[]) {
             screen.y = std::min((int)screen.y, SCREEN_HEIGHT - 1); // Set maximum y bounds
             screen.y = std::max((int)screen.y, 0);                 // Set minimum y bounds
             SDL_Rect cursor = {
-                (screen.x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2),   // Format x screen position relative to window size
-                (screen.y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2),  // Format y screen position relative to window size
+                (int)(screen.x / SCALE_FACTOR_WIDTH) - (CURSOR_SIZE / 2),   // Format x screen position relative to window size
+                (int)(screen.y / SCALE_FACTOR_HEIGHT) - (CURSOR_SIZE / 2),  // Format y screen position relative to window size
                 CURSOR_SIZE,
                 CURSOR_SIZE
             };
