@@ -1,4 +1,4 @@
-# Mouse Track
+# Mouse Track 🖱
 Track, display, and graph the position of a mouse cursor.
 
 The application produces a heatmap and plots the mouse positions. Mouse Track is only available for Windows OS as it requires functions from the Windows API.
@@ -57,7 +57,7 @@ To run the application without writing into data.csv (for longer periods of trac
 ## Examples
 
 ### Tracking
-<img src = "https://github.com/claby2/mouse-track/blob/master/img/tracking-preview.gif?raw=true" width = "400px" alt = "Tracking Preview">
+<img src = "https://github.com/claby2/mouse-track/blob/master/img/tracking-preview.gif?raw=true" width = "400px" alt = "Tracking Preview" style = "align:center;">
 
 ### Playback
 <img src = "https://github.com/claby2/mouse-track/blob/master/img/playback-preview.gif?raw=true" width = "400px" alt = "Playback Preview">
