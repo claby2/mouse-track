@@ -17,7 +17,7 @@ void CLIPrintTracking(long long elapsedTime) {
     if(!(elapsedTime % TRACKING_POLLING_RATE) && elapsedTime != previousTime) {
         previousTime = elapsedTime; // To catch if the next iteration happens during the same elapsed time
         trackingIndex = trackingIndex < sizeof(TRACKING_ANIMATION_FRAMES)/sizeof(*TRACKING_ANIMATION_FRAMES) - 1 ? trackingIndex + 1 : 0;
-        printf("TRACKING %s\r", TRACKING_ANIMATION_FRAMES[trackingIndex]);
+        printf("TRACKING %s %ds\r", TRACKING_ANIMATION_FRAMES[trackingIndex], (elapsedTime / 1000));
         fflush(stdout);
     }
 }
