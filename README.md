@@ -57,7 +57,7 @@ To run the application without writing into data.csv (for longer periods of trac
 ## Examples
 
 ### Tracking
-<img src = "https://github.com/claby2/mouse-track/blob/master/img/tracking-preview.gif?raw=true" width = "400px" alt = "Tracking Preview" style = "align:center;">
+<img src = "https://github.com/claby2/mouse-track/blob/master/img/tracking-preview.gif?raw=true" width = "400px" alt = "Tracking Preview">
 
 ### Playback
 <img src = "https://github.com/claby2/mouse-track/blob/master/img/playback-preview.gif?raw=true" width = "400px" alt = "Playback Preview">
