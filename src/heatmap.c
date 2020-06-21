@@ -1,13 +1,13 @@
 #include "heatmap.h"
 
-const int HEATMAP_WIDTH = 16;
-const int HEATMAP_HEIGHT = 16;
+const int HEATMAP_WIDTH = 16;                                      // Number of columns in heatmap
+const int HEATMAP_HEIGHT = 16;                                     // Number of rows in heatmap
 const int HEATMAP_WINDOW_SIZE = 600;                               // Represents witdth and height
 const int HEATMAP_CELL_SIZE = HEATMAP_WINDOW_SIZE / HEATMAP_WIDTH; // Size of one grid cell on the heatmap
 long long heatmap[HEATMAP_HEIGHT * HEATMAP_WIDTH];                 // Stores frequency coordinate appears when normalized
 long long heatmapMinimum = LONG_MAX;                               // Maximum frequency value in heatmap
 long long heatmapMaximum = 0;                                      // Minimum frequency value in heatmap
-const int COLORMAP_CATEGORIES = 4;                                 // The amount of color categories which belong to the colormap
+const int COLORMAP_CATEGORIES = 4;                                 // The number of color categories which belong to the colormap
 const int NORMALIZED_MAXIMUM = 100;                                // The maximum value the frequency can take when normalized
 const int COLOR_MAXIMUM = 255;                                     // Maximum value for a single color channel
 const float COLORMAP_GRADIENT = 10.2;                              // Calculated by the COLOR_MAXIMUM / (NORMALIZED_MAXIMUM / COLORMAP_CATEGORIES)
