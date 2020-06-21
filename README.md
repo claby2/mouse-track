@@ -53,3 +53,17 @@ To run the application without writing into data.csv (for longer periods of trac
 ### Save graph as image
 1. In src: `python graph.py -s`
     - Graph will be saved as `graph.png` in root folder
+
+## Examples
+
+### Tracking
+![Tracking Preview](https://github.com/claby2/mouse-track/blob/master/img/tracking-preview.gif?raw=true)
+
+### Playback
+![Playback Preview](https://github.com/claby2/mouse-track/blob/master/img/playback-preview.gif?raw=true)
+
+### Heatmap
+![Heatmap Preview](https://github.com/claby2/mouse-track/blob/master/img/heatmap-preview.bmp?raw=true)
+
+### Graph
+![Graph Preview](https://github.com/claby2/mouse-track/blob/master/img/graph-preview.png?raw=true)
