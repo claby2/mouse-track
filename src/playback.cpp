@@ -81,8 +81,6 @@ int main() {
     SCALE_FACTOR_WIDTH = SCREEN_WIDTH / WINDOW_WIDTH;
     SCALE_FACTOR_HEIGHT = SCREEN_HEIGHT / WINDOW_HEIGHT;
 
-    long long playbackDuration = POLLING_RATE * coordinates.size();
-
     CLIPrintPlaybackStart();
 
     while(!quit) {
