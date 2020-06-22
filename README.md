@@ -55,9 +55,6 @@ To run the application without writing into data.csv (for longer periods of trac
 
 ## Examples
 
-### Tracking
-<img src = "./img/tracking-preview.gif?raw=true" width = "400px" alt = "Tracking Preview">
-
 ### Playback
 <img src = "./img/playback-preview.gif?raw=true" width = "400px" alt = "Playback Preview">
 
